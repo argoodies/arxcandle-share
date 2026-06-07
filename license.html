@@ -143,6 +143,11 @@
                 title: "ARCandle Open Source & Licenses",
                 h1: "Open Source & Licenses",
                 free3d: "Free3d.com Personal-Use License"
+            },
+            "ja": {
+                title: "AR祈福 オープンソースとライセンス",
+                h1: "オープンソースとライセンス",
+                free3d: "Free3d.com 個人利用ライセンス"
             }
         };
 
@@ -151,6 +156,7 @@
             var l = (p || navigator.language || 'zh-Hans').toLowerCase();
             if (l.indexOf('hant') >= 0 || l.indexOf('-tw') >= 0 || l.indexOf('-hk') >= 0 || l.indexOf('-mo') >= 0) return 'zh-Hant';
             if (l.indexOf('zh') === 0) return 'zh-Hans';
+            if (l.indexOf('ja') === 0) return 'ja';
             if (l.indexOf('en') === 0) return 'en';
             return 'zh-Hans';
         }

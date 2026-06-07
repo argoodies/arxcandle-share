@@ -266,7 +266,8 @@
         var I18N = {
             "zh-Hans": { title: "AR祈福", brand: "AR祈福", tagline: "增强现实 x 祈福", download: "立即下载" },
             "zh-Hant": { title: "AR祈福", brand: "AR祈福", tagline: "擴增實境 x 祈福", download: "立即下載" },
-            "en":      { title: "ARCandle", brand: "ARCandle", tagline: "Augmented Reality x Blessing", download: "Download Now" }
+            "en":      { title: "ARCandle", brand: "ARCandle", tagline: "Augmented Reality x Blessing", download: "Download Now" },
+            "ja":      { title: "AR祈福", brand: "AR祈福", tagline: "拡張現実 x 祈り", download: "今すぐダウンロード" }
         };
 
         function resolveLang() {
@@ -274,6 +275,7 @@
             var l = (p || navigator.language || 'zh-Hans').toLowerCase();
             if (l.indexOf('hant') >= 0 || l.indexOf('-tw') >= 0 || l.indexOf('-hk') >= 0 || l.indexOf('-mo') >= 0) return 'zh-Hant';
             if (l.indexOf('zh') === 0) return 'zh-Hans';
+            if (l.indexOf('ja') === 0) return 'ja';
             if (l.indexOf('en') === 0) return 'en';
             return 'zh-Hans';
         }

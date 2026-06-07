@@ -115,7 +115,7 @@
 <body class="bg-grid">
     <div id="license" class="content">
         <h1 class="h1 h1w-thin">&nbsp</h1>
-        <h1 class="h3 h1w-thin">开源和第三方许可</h1>
+        <h1 class="h3 h1w-thin" data-i18n="h1">开源和第三方许可</h1>
         <h1 class="h6w-thin">
             <a href="https://github.com/apple/swift/blob/main/LICENSE.txt">Apple/Swift</a>
         </h1>
@@ -123,9 +123,50 @@
             <a href="https://github.com/mixpanel/mixpanel-swift/blob/master/LICENSE">Mixpanel/Mixpanel-Swift</a>
         </h1>
         <h1 class="h6w-thin">
-            <a href="https://free3d.com/zh/3d-models/">Free3d.com 个人使用许可</a>
+            <a href="https://free3d.com/zh/3d-models/" data-i18n="free3d">Free3d.com 个人使用许可</a>
         </h1>
     </div>
+
+    <script type="text/javascript">
+        var I18N = {
+            "zh-Hans": {
+                title: "AR祈福开源和第三方许可",
+                h1: "开源和第三方许可",
+                free3d: "Free3d.com 个人使用许可"
+            },
+            "zh-Hant": {
+                title: "AR祈福開源與第三方授權",
+                h1: "開源與第三方授權",
+                free3d: "Free3d.com 個人使用授權"
+            },
+            "en": {
+                title: "ARCandle Open Source & Licenses",
+                h1: "Open Source & Licenses",
+                free3d: "Free3d.com Personal-Use License"
+            }
+        };
+
+        function resolveLang() {
+            var p = (new URLSearchParams(location.search)).get('lang');
+            var l = (p || navigator.language || 'zh-Hans').toLowerCase();
+            if (l.indexOf('hant') >= 0 || l.indexOf('-tw') >= 0 || l.indexOf('-hk') >= 0 || l.indexOf('-mo') >= 0) return 'zh-Hant';
+            if (l.indexOf('zh') === 0) return 'zh-Hans';
+            if (l.indexOf('en') === 0) return 'en';
+            return 'zh-Hans';
+        }
+
+        (function applyI18n() {
+            var lang = resolveLang();
+            var dict = I18N[lang] || I18N['zh-Hans'];
+            document.documentElement.setAttribute('lang', lang);
+            if (dict.title) document.title = dict.title;
+            var nodes = document.querySelectorAll('[data-i18n]');
+            for (var i = 0; i < nodes.length; i++) {
+                var key = nodes[i].getAttribute('data-i18n');
+                if (dict[key] != null) nodes[i].textContent = dict[key];
+            }
+        })();
+    </script>
 </body>
 
 </html>

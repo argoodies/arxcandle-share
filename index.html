@@ -234,8 +234,8 @@
     <div class="content">
         <h1 class="h1 h1w-thin">&nbsp</h1>
         <h1 class="h1 h1w-thin">&nbsp</h1>
-        <h1 class="h3 h1w-thin">AR祈福</h1>
-        <h1 class="h3 h1w-thin">增强现实 x 祈福</h1>
+        <h1 class="h3 h1w-thin" data-i18n="brand">AR祈福</h1>
+        <h1 class="h3 h1w-thin" data-i18n="tagline">增强现实 x 祈福</h1>
         <h1 class="h1 h1w-thin">&nbsp</h1>
         <div class="phone-root">
             <div class="phone">
@@ -250,9 +250,9 @@
     <div class="footer content">
         <h1 class="h1 h1w-thin">&nbsp</h1>
         <h1 class="h1 h1w-thin">&nbsp</h1>
-        <h1 class="h3 h1w-thin">AR祈福</h1>
+        <h1 class="h3 h1w-thin" data-i18n="brand">AR祈福</h1>
         <h1 class="h1 h1w-thin">&nbsp</h1>
-        <div class="download" onclick="download()">立即下载</div>
+        <div class="download" onclick="download()" data-i18n="download">立即下载</div>
         <h1 class="h1 h1w-thin">&nbsp</h1>
     </div>
     <script type="text/javascript">
@@ -262,6 +262,33 @@
         var mail = function () {
             location.href = 'https://github.com/ARGoodies/arxcandle/issues';
         }
+
+        var I18N = {
+            "zh-Hans": { title: "AR祈福", brand: "AR祈福", tagline: "增强现实 x 祈福", download: "立即下载" },
+            "zh-Hant": { title: "AR祈福", brand: "AR祈福", tagline: "擴增實境 x 祈福", download: "立即下載" },
+            "en":      { title: "ARCandle", brand: "ARCandle", tagline: "Augmented Reality x Blessing", download: "Download Now" }
+        };
+
+        function resolveLang() {
+            var p = (new URLSearchParams(location.search)).get('lang');
+            var l = (p || navigator.language || 'zh-Hans').toLowerCase();
+            if (l.indexOf('hant') >= 0 || l.indexOf('-tw') >= 0 || l.indexOf('-hk') >= 0 || l.indexOf('-mo') >= 0) return 'zh-Hant';
+            if (l.indexOf('zh') === 0) return 'zh-Hans';
+            if (l.indexOf('en') === 0) return 'en';
+            return 'zh-Hans';
+        }
+
+        (function applyI18n() {
+            var lang = resolveLang();
+            var dict = I18N[lang] || I18N['zh-Hans'];
+            document.documentElement.setAttribute('lang', lang);
+            if (dict.title) document.title = dict.title;
+            var nodes = document.querySelectorAll('[data-i18n]');
+            for (var i = 0; i < nodes.length; i++) {
+                var key = nodes[i].getAttribute('data-i18n');
+                if (dict[key] != null) nodes[i].textContent = dict[key];
+            }
+        })();
     </script>
 </body>
 
